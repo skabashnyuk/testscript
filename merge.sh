@@ -19,4 +19,4 @@ for project in ${PLIST[@]}; do
 done
 git mv onpremises/ assembly/
 git commit -m "Moving onpremises ot assembly folder"
-curl https://gist.githubusercontent.com/skabashnyuk/dfa0a04f09152c311220/raw/24f261ecb156ee835d2e7239dfe8e4a6479b9d4c/gistfile1.txt | git apply -v --index
+curl https://raw.githubusercontent.com/skabashnyuk/testscript/master/diff | git apply -v --index
