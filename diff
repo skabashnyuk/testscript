@@ -1,8 +1,8 @@
 diff --git a/assembly/pom.xml b/assembly/pom.xml
-index 664f67c..038524f 100644
+index 664f67c..0cfc536 100644
 --- a/assembly/pom.xml
 +++ b/assembly/pom.xml
-@@ -18,8 +18,8 @@
+@@ -18,9 +18,10 @@
  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
      <modelVersion>4.0.0</modelVersion>
      <parent>
@@ -11,9 +11,11 @@ index 664f67c..038524f 100644
 +        <artifactId>onpremises-assembly-parent</artifactId>
 +        <groupId>com.codenvy.onpremises</groupId>
          <version>4.0.0-RC14-SNAPSHOT</version>
++        <relativePath>../pom.xml</relativePath>
      </parent>
      <groupId>com.codenvy.onpremises</groupId>
-@@ -44,15 +44,7 @@
+     <artifactId>onpremises-ide-parent</artifactId>
+@@ -44,15 +45,7 @@
          <module>onpremises-ide-packaging-zip-terminal</module>
          <module>onpremises-ide-packaging-tomcat-im</module>
      </modules>
@@ -30,10 +32,10 @@ index 664f67c..038524f 100644
      </properties>
  </project>
 diff --git a/cdec/pom.xml b/cdec/pom.xml
-index e97c94a..51bfe8d 100644
+index e97c94a..b43b402 100644
 --- a/cdec/pom.xml
 +++ b/cdec/pom.xml
-@@ -18,8 +18,8 @@
+@@ -18,10 +18,10 @@
  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
      <modelVersion>4.0.0</modelVersion>
      <parent>
@@ -42,8 +44,11 @@ index e97c94a..51bfe8d 100644
 +        <artifactId>onpremises-assembly-parent</artifactId>
 +        <groupId>com.codenvy.onpremises</groupId>
          <version>4.0.0-RC14-SNAPSHOT</version>
-         <relativePath />
+-        <relativePath />
++        <relativePath>../pom.xml</relativePath>
      </parent>
+     <groupId>com.codenvy.im</groupId>
+     <artifactId>codenvy-im</artifactId>
 @@ -39,14 +39,4 @@
          <module>installation-manager-server-war</module>
          <module>installation-manager-tests</module>
@@ -60,7 +65,7 @@ index e97c94a..51bfe8d 100644
 -    </properties>
  </project>
 diff --git a/cli/pom.xml b/cli/pom.xml
-index 70d5719..9372476 100644
+index 70d5719..8518792 100644
 --- a/cli/pom.xml
 +++ b/cli/pom.xml
 @@ -14,9 +14,10 @@
@@ -72,7 +77,7 @@ index 70d5719..9372476 100644
 +        <artifactId>onpremises-assembly-parent</artifactId>
 +        <groupId>com.codenvy.onpremises</groupId>
          <version>4.0.0-RC14-SNAPSHOT</version>
-+        <relativePath />
++        <relativePath>../pom.xml</relativePath>
      </parent>
      <groupId>com.codenvy.cli</groupId>
      <artifactId>codenvy-cli</artifactId>
@@ -111,10 +116,10 @@ index 70d5719..9372476 100644
          <pluginManagement>
              <plugins>
 diff --git a/dashboard/pom.xml b/dashboard/pom.xml
-index 8d043aa..fcb8705 100644
+index 8d043aa..55c8204 100644
 --- a/dashboard/pom.xml
 +++ b/dashboard/pom.xml
-@@ -16,170 +16,149 @@
+@@ -16,170 +16,150 @@
  
  -->
  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -127,6 +132,7 @@ index 8d043aa..fcb8705 100644
 +        <artifactId>onpremises-assembly-parent</artifactId>
 +        <groupId>com.codenvy.onpremises</groupId>
 +        <version>4.0.0-RC14-SNAPSHOT</version>
++        <relativePath>../pom.xml</relativePath>
 +    </parent>
 +    <groupId>com.codenvy.dashboard</groupId>
 +    <artifactId>dashboard-war</artifactId>
@@ -426,10 +432,10 @@ index 8d043aa..fcb8705 100644
 +    </profiles>
  </project>
 diff --git a/factory/pom.xml b/factory/pom.xml
-index 631d544..2994bee 100644
+index 631d544..2e7308c 100644
 --- a/factory/pom.xml
 +++ b/factory/pom.xml
-@@ -18,8 +18,8 @@
+@@ -18,9 +18,10 @@
  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
      <modelVersion>4.0.0</modelVersion>
      <parent>
@@ -438,9 +444,11 @@ index 631d544..2994bee 100644
 +        <artifactId>onpremises-assembly-parent</artifactId>
 +        <groupId>com.codenvy.onpremises</groupId>
          <version>4.0.0-RC14-SNAPSHOT</version>
++        <relativePath>../pom.xml</relativePath>
      </parent>
      <groupId>com.codenvy.factory</groupId>
-@@ -30,15 +30,4 @@
+     <artifactId>codenvy-factory-parent</artifactId>
+@@ -30,15 +31,4 @@
      <modules>
          <module>codenvy-factory-storage-mongo</module>
      </modules>
@@ -457,10 +465,10 @@ index 631d544..2994bee 100644
 -    </properties>
  </project>
 diff --git a/hosted-infrastructure/pom.xml b/hosted-infrastructure/pom.xml
-index 065f414..1bd78de 100644
+index 065f414..d00b24d 100644
 --- a/hosted-infrastructure/pom.xml
 +++ b/hosted-infrastructure/pom.xml
-@@ -18,8 +18,8 @@
+@@ -18,9 +18,10 @@
  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
      <modelVersion>4.0.0</modelVersion>
      <parent>
@@ -469,9 +477,11 @@ index 065f414..1bd78de 100644
 +        <artifactId>onpremises-assembly-parent</artifactId>
 +        <groupId>com.codenvy.onpremises</groupId>
          <version>4.0.0-RC14-SNAPSHOT</version>
++        <relativePath>../pom.xml</relativePath>
      </parent>
      <groupId>com.codenvy.hosted-infrastructure</groupId>
-@@ -43,39 +43,4 @@
+     <artifactId>codenvy-hosted-infrastructure-parent</artifactId>
+@@ -43,39 +44,4 @@
          <module>codenvy-hosted-sso-server-ldap</module>
          <module>codenvy-hosted-sso-server-organization</module>
      </modules>
@@ -512,7 +522,7 @@ index 065f414..1bd78de 100644
 -    </pluginRepositories>
  </project>
 diff --git a/odyssey/pom.xml b/odyssey/pom.xml
-index f88d13d..8f62b4f 100644
+index f88d13d..8a3afbd 100644
 --- a/odyssey/pom.xml
 +++ b/odyssey/pom.xml
 @@ -18,26 +18,16 @@
@@ -524,7 +534,7 @@ index f88d13d..8f62b4f 100644
 +        <artifactId>onpremises-assembly-parent</artifactId>
 +        <groupId>com.codenvy.onpremises</groupId>
          <version>4.0.0-RC14-SNAPSHOT</version>
-+        <relativePath />
++        <relativePath>../pom.xml</relativePath>
      </parent>
      <groupId>com.codenvy</groupId>
      <artifactId>odyssey</artifactId>
@@ -554,7 +564,7 @@ index f88d13d..8f62b4f 100644
                      <filesets>
                          <fileset>
 diff --git a/platform-api-client-java/pom.xml b/platform-api-client-java/pom.xml
-index 27a3d03..bdf4b6c 100644
+index 27a3d03..0bb649e 100644
 --- a/platform-api-client-java/pom.xml
 +++ b/platform-api-client-java/pom.xml
 @@ -14,9 +14,10 @@
@@ -566,7 +576,7 @@ index 27a3d03..bdf4b6c 100644
 +        <artifactId>onpremises-assembly-parent</artifactId>
 +        <groupId>com.codenvy.onpremises</groupId>
          <version>4.0.0-RC14-SNAPSHOT</version>
-+        <relativePath />
++        <relativePath>../pom.xml</relativePath>
      </parent>
      <groupId>com.codenvy.platform-api-client-java</groupId>
      <artifactId>codenvy-platform-api-client-java-parent</artifactId>
@@ -604,10 +614,10 @@ index 27a3d03..bdf4b6c 100644
          <pluginManagement>
              <plugins>
 diff --git a/plugins/pom.xml b/plugins/pom.xml
-index 3bcdb43..630d7e1 100644
+index 3bcdb43..9ece222 100644
 --- a/plugins/pom.xml
 +++ b/plugins/pom.xml
-@@ -18,8 +18,8 @@
+@@ -18,9 +18,10 @@
  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
      <modelVersion>4.0.0</modelVersion>
      <parent>
@@ -616,9 +626,11 @@ index 3bcdb43..630d7e1 100644
 +        <artifactId>onpremises-assembly-parent</artifactId>
 +        <groupId>com.codenvy.onpremises</groupId>
          <version>4.0.0-RC14-SNAPSHOT</version>
++        <relativePath>../pom.xml</relativePath>
      </parent>
      <groupId>com.codenvy.plugin</groupId>
-@@ -37,40 +37,4 @@
+     <artifactId>codenvy-plugin-parent</artifactId>
+@@ -37,40 +38,4 @@
          <module>plugin-hosted</module>
          <module>plugin-webhooks</module>
      </modules>
