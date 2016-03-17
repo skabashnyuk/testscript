@@ -17,6 +17,8 @@ for project in ${PLIST[@]}; do
   git commit -m "Subtree merged in $project"
   echo "Merging $project complete"
 done
+git mv hosted-infrastructure/ core/
+git commit -m "Moving hosted-infrastructure to core folder"
 git mv onpremises/ assembly/
-git commit -m "Moving onpremises ot assembly folder"
+git commit -m "Moving onpremises to assembly folder"
 curl https://raw.githubusercontent.com/skabashnyuk/testscript/master/diff | git apply -v --index

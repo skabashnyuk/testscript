@@ -673,7 +673,7 @@ index 3bcdb43..9ece222 100644
  </project>
 diff --git a/pom.xml b/pom.xml
 new file mode 100644
-index 0000000..38c9f22
+index 0000000..a6c26dc
 --- /dev/null
 +++ b/pom.xml
 @@ -0,0 +1,52 @@
@@ -707,14 +707,14 @@ index 0000000..38c9f22
 +    <packaging>pom</packaging>
 +    <name>Onpremises :: Parent</name>
 +    <modules>
-+        <module>hosted-infrastructure</module>
++        <module>core</module>
 +        <module>plugins</module>
 +        <module>factory</module>
 +        <module>dashboard</module>
 +        <module>odyssey</module>
-+        <module>cdec</module>
-+        <module>cli</module>
 +        <module>platform-api-client-java</module>
++        <module>cli</module>
++        <module>cdec</module>
 +        <module>assembly</module>
 +    </modules>
 +    <scm>
