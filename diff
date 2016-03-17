@@ -31,6 +31,104 @@ index 664f67c..0cfc536 100644
 -        <version.license-header>codenvy-codenvy-license-resource-bundle</version.license-header>
      </properties>
  </project>
+diff --git a/cdec/installation-manager-cli-assembly/pom.xml b/cdec/installation-manager-cli-assembly/pom.xml
+index ea05d97..695f3ae 100644
+--- a/cdec/installation-manager-cli-assembly/pom.xml
++++ b/cdec/installation-manager-cli-assembly/pom.xml
+@@ -28,18 +28,15 @@
+         <dependency>
+             <groupId>com.codenvy.cli</groupId>
+             <artifactId>cli-assembly</artifactId>
+-            <version>${codenvy.cli.version}</version>
+             <type>zip</type>
+         </dependency>
+         <dependency>
+             <groupId>com.codenvy.im</groupId>
+             <artifactId>installation-manager-cli-bundle</artifactId>
+-            <version>${project.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>com.codenvy.im</groupId>
+             <artifactId>installation-manager-cli-features</artifactId>
+-            <version>${project.version}</version>
+             <type>xml</type>
+             <classifier>features</classifier>
+         </dependency>
+@@ -104,14 +101,14 @@
+                         </goals>
+                         <configuration>
+                             <target>
+-                                <unzip dest="${project.build.directory}/" src="${project.build.directory}/packager-conf/zip/cli-assembly-${codenvy.cli.version}.zip" />
+-                                <replace dir="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/bin">
++                                <unzip dest="${project.build.directory}/" src="${project.build.directory}/packager-conf/zip/cli-assembly-${project.version}.zip" />
++                                <replace dir="${project.build.directory}/codenvy-cli-${project.version}/bin">
+                                     <include name="*" />
+                                     <exclude name="*.bat" />
+                                     <replacetoken>#!/bin/sh</replacetoken>
+                                     <replacevalue>#!/bin/bash</replacevalue>
+                                 </replace>
+-                                <replace file="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/bin/codenvy">
++                                <replace file="${project.build.directory}/codenvy-cli-${project.version}/bin/codenvy">
+                                     <replacetoken>main "$@"</replacetoken>
+                                     <replacevalue>CURRENT_DIR=$(pwd)
+                                         cd ~/codenvy-im
+@@ -130,36 +127,36 @@
+                                         main "$@"</replacevalue>
+                                 </replace>
+                                 <delete>
+-                                    <fileset dir="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/bin/" includes="*.bat" />
++                                    <fileset dir="${project.build.directory}/codenvy-cli-${project.version}/bin/" includes="*.bat" />
+                                 </delete>
+                                 <!-- make it possible to pass empty command-line argument "" or argument with spaces only " " to java -->
+-                                <replace file="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/bin/codenvy">
++                                <replace file="${project.build.directory}/codenvy-cli-${project.version}/bin/codenvy">
+                                     <replacetoken>codenvy:$COMMAND "$*"</replacetoken>
+                                     <replacevalue>codenvy:$COMMAND $(for arg in "$@"; do echo "\"$arg\""; done)</replacevalue>
+                                 </replace>
+-                                <replace file="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/etc/org.apache.karaf.features.cfg">
++                                <replace file="${project.build.directory}/codenvy-cli-${project.version}/etc/org.apache.karaf.features.cfg">
+                                     <replacetoken><![CDATA[featuresBoot=]]></replacetoken>
+                                     <replacevalue><![CDATA[featuresBoot=installation-manager-cli-features,]]></replacevalue>
+                                 </replace>
+-                                <replace file="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/etc/org.apache.karaf.features.cfg">
++                                <replace file="${project.build.directory}/codenvy-cli-${project.version}/etc/org.apache.karaf.features.cfg">
+                                     <replacetoken><![CDATA[featuresRepositories=]]></replacetoken>
+                                     <replacevalue><![CDATA[featuresRepositories=mvn:com.codenvy.im/installation-manager-cli-features/${project.version}/xml/features,]]></replacevalue>
+                                 </replace>
+-                                <replace file="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/etc/org.apache.karaf.features.repos.cfg">
++                                <replace file="${project.build.directory}/codenvy-cli-${project.version}/etc/org.apache.karaf.features.repos.cfg">
+                                     <replacetoken><![CDATA[cellar       =]]></replacetoken>
+                                     <replacevalue><![CDATA[installation-manager-codenvy-cli  = com.codenvy.im:installation-manager-cli-feature:xml:features(0,]
+ cellar       =]]></replacevalue>
+                                 </replace>
+-                                <replace file="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/etc/config.properties">
++                                <replace file="${project.build.directory}/codenvy-cli-${project.version}/etc/config.properties">
+                                     <replacetoken>karaf.delay.console=false</replacetoken>
+                                     <replacevalue>karaf.delay.console=true</replacevalue>
+                                 </replace>
+-                                <copy file="${project.build.directory}/packager-conf/jar/installation-manager-cli-bundle-${project.version}.jar" tofile="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/system/com/codenvy/im/installation-manager-cli-bundle/${project.version}/installation-manager-cli-bundle-${project.version}.jar" />
+-                                <copy file="${project.build.directory}/packager-conf/xml/installation-manager-cli-features-${project.version}-features.xml" tofile="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/system/com/codenvy/im/installation-manager-cli-features/${project.version}/installation-manager-cli-features-${project.version}-features.xml" />
+-                                <copy file="${project.build.directory}/classes/codenvy-cli/etc/org.ops4j.pax.logging.cfg" tofile="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/etc/org.ops4j.pax.logging.cfg" />
+-                                <copy file="${project.build.directory}/classes/codenvy-cli/etc/java.util.logging.properties" tofile="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/etc/java.util.logging.properties" />
++                                <copy file="${project.build.directory}/packager-conf/jar/installation-manager-cli-bundle-${project.version}.jar" tofile="${project.build.directory}/codenvy-cli-${project.version}/system/com/codenvy/im/installation-manager-cli-bundle/${project.version}/installation-manager-cli-bundle-${project.version}.jar" />
++                                <copy file="${project.build.directory}/packager-conf/xml/installation-manager-cli-features-${project.version}-features.xml" tofile="${project.build.directory}/codenvy-cli-${project.version}/system/com/codenvy/im/installation-manager-cli-features/${project.version}/installation-manager-cli-features-${project.version}-features.xml" />
++                                <copy file="${project.build.directory}/classes/codenvy-cli/etc/org.ops4j.pax.logging.cfg" tofile="${project.build.directory}/codenvy-cli-${project.version}/etc/org.ops4j.pax.logging.cfg" />
++                                <copy file="${project.build.directory}/classes/codenvy-cli/etc/java.util.logging.properties" tofile="${project.build.directory}/codenvy-cli-${project.version}/etc/java.util.logging.properties" />
+                                 <!-- turn off login command in the codenvy cli command jar-->
+-                                <unzip dest="${project.build.directory}/archive-tmp/jar" src="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/system/com/codenvy/cli/cli-command/${codenvy.cli.version}/cli-command-${codenvy.cli.version}.jar" />
++                                <unzip dest="${project.build.directory}/archive-tmp/jar" src="${project.build.directory}/codenvy-cli-${project.version}/system/com/codenvy/cli/cli-command/${project.version}/cli-command-${project.version}.jar" />
+                                 <replace file="${project.build.directory}/archive-tmp/jar/META-INF/services/org/apache/karaf/shell/commands">
+                                     <replacetoken>com.codenvy.cli.command.builtin.LoginCommand</replacetoken>
+                                     <replacevalue />
+@@ -172,7 +169,7 @@ cellar       =]]></replacevalue>
+                                     <regexp pattern="&lt;command&gt;[^&lt;]*&lt;action class=&quot;com.codenvy.cli.command.builtin.LoginCommand&quot; /&gt;[^&lt;]*&lt;/command&gt;" />
+                                     <substitution expression="" />
+                                 </replaceregexp>
+-                                <zip basedir="${project.build.directory}/archive-tmp/jar" destfile="${project.build.directory}/codenvy-cli-${codenvy.cli.version}/system/com/codenvy/cli/cli-command/${codenvy.cli.version}/cli-command-${codenvy.cli.version}.jar" />
++                                <zip basedir="${project.build.directory}/archive-tmp/jar" destfile="${project.build.directory}/codenvy-cli-${project.version}/system/com/codenvy/cli/cli-command/${project.version}/cli-command-${project.version}.jar" />
+                             </target>
+                         </configuration>
+                     </execution>
 diff --git a/cdec/pom.xml b/cdec/pom.xml
 index e97c94a..b43b402 100644
 --- a/cdec/pom.xml
@@ -65,7 +163,7 @@ index e97c94a..b43b402 100644
 -    </properties>
  </project>
 diff --git a/cli/pom.xml b/cli/pom.xml
-index 70d5719..8518792 100644
+index 70d5719..19ecc33 100644
 --- a/cli/pom.xml
 +++ b/cli/pom.xml
 @@ -14,9 +14,10 @@
@@ -81,7 +179,7 @@ index 70d5719..8518792 100644
      </parent>
      <groupId>com.codenvy.cli</groupId>
      <artifactId>codenvy-cli</artifactId>
-@@ -49,12 +50,6 @@
+@@ -49,15 +50,8 @@
          <module>shell</module>
          <module>assembly</module>
      </modules>
@@ -93,8 +191,49 @@ index 70d5719..8518792 100644
 -    </scm>
      <properties>
          <bnd-plugin.attributes />
-         <com.codenvy.client.version>${project.version}</com.codenvy.client.version>
-@@ -148,20 +143,6 @@
+-        <com.codenvy.client.version>${project.version}</com.codenvy.client.version>
+         <jline.version>2.12</jline.version>
+         <maven.bundle-plugin.version>2.5.0</maven.bundle-plugin.version>
+         <org.apache.karaf.feature-plugin.version>2.3.5</org.apache.karaf.feature-plugin.version>
+@@ -71,36 +65,7 @@
+     </properties>
+     <dependencyManagement>
+         <dependencies>
+-            <dependency>
+-                <groupId>com.codenvy.cli</groupId>
+-                <artifactId>cli-command</artifactId>
+-                <version>${project.version}</version>
+-            </dependency>
+-            <dependency>
+-                <groupId>com.codenvy.cli</groupId>
+-                <artifactId>cli-preferences-api</artifactId>
+-                <version>${project.version}</version>
+-            </dependency>
+-            <dependency>
+-                <groupId>com.codenvy.cli</groupId>
+-                <artifactId>cli-preferences-impl</artifactId>
+-                <version>${project.version}</version>
+-            </dependency>
+-            <dependency>
+-                <groupId>com.codenvy.cli</groupId>
+-                <artifactId>cli-shell-branding</artifactId>
+-                <version>${project.version}</version>
+-            </dependency>
+-            <dependency>
+-                <groupId>com.codenvy.platform-api-client-java</groupId>
+-                <artifactId>codenvy-platform-api-client-java-api</artifactId>
+-                <version>${codenvy.platform-api-client-java.version}</version>
+-            </dependency>
+-            <dependency>
+-                <groupId>com.codenvy.platform-api-client-java</groupId>
+-                <artifactId>codenvy-platform-api-client-java-dummy</artifactId>
+-                <version>${codenvy.platform-api-client-java.version}</version>
+-            </dependency>
++
+             <dependency>
+                 <groupId>jline</groupId>
+                 <artifactId>jline</artifactId>
+@@ -148,20 +113,6 @@
              </dependency>
          </dependencies>
      </dependencyManagement>
@@ -115,6 +254,63 @@ index 70d5719..8518792 100644
      <build>
          <pluginManagement>
              <plugins>
+diff --git a/core/pom.xml b/core/pom.xml
+index 065f414..d00b24d 100644
+--- a/core/pom.xml
++++ b/core/pom.xml
+@@ -18,9 +18,10 @@
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+     <parent>
+-        <artifactId>maven-depmgt-pom</artifactId>
+-        <groupId>com.codenvy.che.depmgt</groupId>
++        <artifactId>onpremises-assembly-parent</artifactId>
++        <groupId>com.codenvy.onpremises</groupId>
+         <version>4.0.0-RC14-SNAPSHOT</version>
++        <relativePath>../pom.xml</relativePath>
+     </parent>
+     <groupId>com.codenvy.hosted-infrastructure</groupId>
+     <artifactId>codenvy-hosted-infrastructure-parent</artifactId>
+@@ -43,39 +44,4 @@
+         <module>codenvy-hosted-sso-server-ldap</module>
+         <module>codenvy-hosted-sso-server-organization</module>
+     </modules>
+-    <scm>
+-        <connection>scm:git:git@github.com:codenvy/hosted-infrastructure.git</connection>
+-        <developerConnection>scm:git:git@github.com:codenvy/hosted-infrastructure.git</developerConnection>
+-        <tag>HEAD</tag>
+-        <url>https://github.com/codenvy/hosted-infrastructure</url>
+-    </scm>
+-    <properties>
+-        <maven.releases.repo.url>https://maven.codenvycorp.com/content/repositories/codenvy-private-releases/</maven.releases.repo.url>
+-        <maven.snapshots.repo.url>https://maven.codenvycorp.com/content/repositories/codenvy-private-snapshots/</maven.snapshots.repo.url>
+-        <version.license-header>codenvy-codenvy-license-resource-bundle</version.license-header>
+-    </properties>
+-    <repositories>
+-        <repository>
+-            <id>codenvy-public-repo</id>
+-            <name>codenvy public</name>
+-            <url>https://maven.codenvycorp.com/content/groups/public/</url>
+-        </repository>
+-        <repository>
+-            <id>codenvy-public-snapshots-repo</id>
+-            <name>codenvy public snapshots</name>
+-            <url>https://maven.codenvycorp.com/content/repositories/codenvy-public-snapshots/</url>
+-        </repository>
+-    </repositories>
+-    <pluginRepositories>
+-        <pluginRepository>
+-            <id>codenvy-public-repo</id>
+-            <name>codenvy public</name>
+-            <url>https://maven.codenvycorp.com/content/groups/public/</url>
+-        </pluginRepository>
+-        <pluginRepository>
+-            <id>codenvy-public-snapshots-repo</id>
+-            <name>codenvy public snapshots</name>
+-            <url>https://maven.codenvycorp.com/content/repositories/codenvy-public-snapshots/</url>
+-        </pluginRepository>
+-    </pluginRepositories>
+ </project>
 diff --git a/dashboard/pom.xml b/dashboard/pom.xml
 index 8d043aa..55c8204 100644
 --- a/dashboard/pom.xml
@@ -464,63 +660,6 @@ index 631d544..2e7308c 100644
 -        <version.license-header>codenvy-codenvy-license-resource-bundle</version.license-header>
 -    </properties>
  </project>
-diff --git a/core/pom.xml b/core/pom.xml
-index 065f414..d00b24d 100644
---- a/core/pom.xml
-+++ b/core/pom.xml
-@@ -18,9 +18,10 @@
- <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-     <modelVersion>4.0.0</modelVersion>
-     <parent>
--        <artifactId>maven-depmgt-pom</artifactId>
--        <groupId>com.codenvy.che.depmgt</groupId>
-+        <artifactId>onpremises-assembly-parent</artifactId>
-+        <groupId>com.codenvy.onpremises</groupId>
-         <version>4.0.0-RC14-SNAPSHOT</version>
-+        <relativePath>../pom.xml</relativePath>
-     </parent>
-     <groupId>com.codenvy.hosted-infrastructure</groupId>
-     <artifactId>codenvy-hosted-infrastructure-parent</artifactId>
-@@ -43,39 +44,4 @@
-         <module>codenvy-hosted-sso-server-ldap</module>
-         <module>codenvy-hosted-sso-server-organization</module>
-     </modules>
--    <scm>
--        <connection>scm:git:git@github.com:codenvy/hosted-infrastructure.git</connection>
--        <developerConnection>scm:git:git@github.com:codenvy/hosted-infrastructure.git</developerConnection>
--        <tag>HEAD</tag>
--        <url>https://github.com/codenvy/hosted-infrastructure</url>
--    </scm>
--    <properties>
--        <maven.releases.repo.url>https://maven.codenvycorp.com/content/repositories/codenvy-private-releases/</maven.releases.repo.url>
--        <maven.snapshots.repo.url>https://maven.codenvycorp.com/content/repositories/codenvy-private-snapshots/</maven.snapshots.repo.url>
--        <version.license-header>codenvy-codenvy-license-resource-bundle</version.license-header>
--    </properties>
--    <repositories>
--        <repository>
--            <id>codenvy-public-repo</id>
--            <name>codenvy public</name>
--            <url>https://maven.codenvycorp.com/content/groups/public/</url>
--        </repository>
--        <repository>
--            <id>codenvy-public-snapshots-repo</id>
--            <name>codenvy public snapshots</name>
--            <url>https://maven.codenvycorp.com/content/repositories/codenvy-public-snapshots/</url>
--        </repository>
--    </repositories>
--    <pluginRepositories>
--        <pluginRepository>
--            <id>codenvy-public-repo</id>
--            <name>codenvy public</name>
--            <url>https://maven.codenvycorp.com/content/groups/public/</url>
--        </pluginRepository>
--        <pluginRepository>
--            <id>codenvy-public-snapshots-repo</id>
--            <name>codenvy public snapshots</name>
--            <url>https://maven.codenvycorp.com/content/repositories/codenvy-public-snapshots/</url>
--        </pluginRepository>
--    </pluginRepositories>
- </project>
 diff --git a/odyssey/pom.xml b/odyssey/pom.xml
 index f88d13d..8a3afbd 100644
 --- a/odyssey/pom.xml
@@ -673,10 +812,10 @@ index 3bcdb43..9ece222 100644
  </project>
 diff --git a/pom.xml b/pom.xml
 new file mode 100644
-index 0000000..a6c26dc
+index 0000000..5c61b34
 --- /dev/null
 +++ b/pom.xml
-@@ -0,0 +1,52 @@
+@@ -0,0 +1,502 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<!--
 +
@@ -723,9 +862,459 @@ index 0000000..a6c26dc
 +        <tag>HEAD</tag>
 +    </scm>
 +    <properties>
++        <codenvy.analytics.version>3.13.4</codenvy.analytics.version>
 +        <maven.releases.repo.url>https://maven.codenvycorp.com/content/repositories/codenvy-private-releases/</maven.releases.repo.url>
 +        <maven.snapshots.repo.url>https://maven.codenvycorp.com/content/repositories/codenvy-private-snapshots/</maven.snapshots.repo.url>
 +        <odyssey.classifier>onprem-se</odyssey.classifier>
 +        <version.license-header>codenvy-codenvy-license-resource-bundle</version.license-header>
 +    </properties>
++    <dependencyManagement>
++        <dependencies>
++            <dependency>
++                <groupId>com.codenvy</groupId>
++                <artifactId>odyssey</artifactId>
++                <version>${project.version}</version>
++                <type>zip</type>
++                <classifier>stage</classifier>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy</groupId>
++                <artifactId>odyssey</artifactId>
++                <version>${project.version}</version>
++                <type>zip</type>
++                <classifier>prod</classifier>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy</groupId>
++                <artifactId>odyssey</artifactId>
++                <version>${project.version}</version>
++                <type>zip</type>
++                <classifier>onprem-se</classifier>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.cli</groupId>
++                <artifactId>cli-assembly</artifactId>
++                <version>${project.version}</version>
++                <type>zip</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.cli</groupId>
++                <artifactId>cli-command</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.cli</groupId>
++                <artifactId>cli-preferences-api</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.cli</groupId>
++                <artifactId>cli-preferences-impl</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.cli</groupId>
++                <artifactId>cli-shell-branding</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.dashboard</groupId>
++                <artifactId>dashboard-war</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.factory</groupId>
++                <artifactId>codenvy-factory-packaging-war</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.factory</groupId>
++                <artifactId>codenvy-factory-storage-mongo</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-api-admin</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-api-creditcard</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-api-subscription</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-commons-j2ee</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-events</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-infra-filters</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-mail-client</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-mail-server</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-platform-api-impl</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-recoverpassword</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-sql-core</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-sso-auth-bearer</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-sso-client</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-sso-oauth</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-sso-server</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-sso-server-ldap</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-sso-server-organization</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-subscription-onpremises</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.hosted-infrastructure</groupId>
++                <artifactId>codenvy-hosted-subscription-saas</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.im</groupId>
++                <artifactId>installation-manager-cli-bundle</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.im</groupId>
++                <artifactId>installation-manager-cli-features</artifactId>
++                <version>${project.version}</version>
++                <type>xml</type>
++                <classifier>features</classifier>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.im</groupId>
++                <artifactId>installation-manager-core</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.im</groupId>
++                <artifactId>installation-manager-server-api-docs</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.im</groupId>
++                <artifactId>installation-manager-server-war</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.im</groupId>
++                <artifactId>update-server-packaging-war</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-compiling-war-ide</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-compiling-war-ide-codenvy</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-tomcat-api</artifactId>
++                <version>${project.version}</version>
++                <type>zip</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-tomcat-codenvy-allinone</artifactId>
++                <version>${project.version}</version>
++                <type>zip</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-tomcat-ext-server</artifactId>
++                <version>${project.version}</version>
++                <type>zip</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-tomcat-im</artifactId>
++                <version>${project.version}</version>
++                <type>zip</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-tomcat-site</artifactId>
++                <version>${project.version}</version>
++                <type>zip</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-war-admin-dashboard</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-war-dashboard</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-war-ext-server</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-war-factory</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-war-ide</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-war-ide-resources</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-war-platform-api</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-war-webroot-codenvy</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.onpremises</groupId>
++                <artifactId>onpremises-ide-packaging-war-website-codenvy</artifactId>
++                <version>${project.version}</version>
++                <type>war</type>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.platform-api-client-java</groupId>
++                <artifactId>codenvy-platform-api-client-java-api</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.platform-api-client-java</groupId>
++                <artifactId>codenvy-platform-api-client-java-dummy</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-contribution-projecttype</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-contribution-vcs</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-hosted-client-gwt-subscription</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-hosted-ext-factory</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-hosted-ext-hosted</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-hosted-ext-permissions</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-hosted-ext-profile</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-hosted-ext-support-help</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-machine-hosted</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-bitbucket-ext-bitbucket</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-bitbucket-git-provider</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-bitbucket-oauth2</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-contribution</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-google-oauth2</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-microsoft-git-provider</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-microsoft-oauth2</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-microsoft-vsts-ext-client</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-microsoft-vsts-ext-server</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-microsoft-vsts-ext-shared</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-projectlocker-git-provider</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-projectlocker-oauth2</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-review</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-webhooks-base</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-webhooks-github</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-webhooks-vsts</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-wso2-git-provider</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-plugin-wso2-oauth2</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-router-machine</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++            <dependency>
++                <groupId>com.codenvy.plugin</groupId>
++                <artifactId>codenvy-swarm-machine</artifactId>
++                <version>${project.version}</version>
++            </dependency>
++        </dependencies>
++    </dependencyManagement>
 +</project>
