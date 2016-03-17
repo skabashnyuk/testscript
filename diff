@@ -464,7 +464,7 @@ index 631d544..2e7308c 100644
 -        <version.license-header>codenvy-codenvy-license-resource-bundle</version.license-header>
 -    </properties>
  </project>
-diff --git a/hosted-infrastructure/pom.xml b/hosted-infrastructure/pom.xml
+diff --git a/core/pom.xml b/core/pom.xml
 index 065f414..d00b24d 100644
 --- a/hosted-infrastructure/pom.xml
 +++ b/hosted-infrastructure/pom.xml
