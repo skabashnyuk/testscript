@@ -466,8 +466,8 @@ index 631d544..2e7308c 100644
  </project>
 diff --git a/core/pom.xml b/core/pom.xml
 index 065f414..d00b24d 100644
---- a/hosted-infrastructure/pom.xml
-+++ b/hosted-infrastructure/pom.xml
+--- a/core/pom.xml
++++ b/core/pom.xml
 @@ -18,9 +18,10 @@
  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
      <modelVersion>4.0.0</modelVersion>
