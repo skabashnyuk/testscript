@@ -129,6 +129,28 @@ index ea05d97..695f3ae 100644
                              </target>
                          </configuration>
                      </execution>
+diff --git a/cdec/installation-manager-cli-assembly/src/main/assemblies/assembly.xml b/cdec/installation-manager-cli-assembly/src/main/assemblies/assembly.xml
+index f656a30..0bf48f2 100644
+--- a/cdec/installation-manager-cli-assembly/src/main/assemblies/assembly.xml
++++ b/cdec/installation-manager-cli-assembly/src/main/assemblies/assembly.xml
+@@ -22,7 +22,7 @@
+     <includeBaseDirectory>false</includeBaseDirectory>
+     <fileSets>
+         <fileSet>
+-            <directory>${project.build.directory}/codenvy-cli-${codenvy.cli.version}</directory>
++            <directory>${project.build.directory}/codenvy-cli-${project.version}</directory>
+             <outputDirectory>/</outputDirectory>
+             <includes>
+                 <include>/bin/*</include>
+@@ -30,7 +30,7 @@
+             <fileMode>755</fileMode>
+         </fileSet>
+         <fileSet>
+-            <directory>${project.build.directory}/codenvy-cli-${codenvy.cli.version}</directory>
++            <directory>${project.build.directory}/codenvy-cli-${project.version}</directory>
+             <outputDirectory>/</outputDirectory>
+             <includes>
+                 <include>**/*</include>
 diff --git a/cdec/pom.xml b/cdec/pom.xml
 index e97c94a..b43b402 100644
 --- a/cdec/pom.xml
@@ -162,6 +184,19 @@ index e97c94a..b43b402 100644
 -        <version.license-header>codenvy-codenvy-license-resource-bundle</version.license-header>
 -    </properties>
  </project>
+diff --git a/cli/assembly/pom.xml b/cli/assembly/pom.xml
+index 202f981..46e989d 100644
+--- a/cli/assembly/pom.xml
++++ b/cli/assembly/pom.xml
+@@ -203,7 +203,7 @@ set CLASSPATH=%CLASSPATH%;%KARAF_HOME%\system\jline\jline\2.12\jline-2.12.jar]]>
+                         <configuration>
+                             <descriptors>
+                                 <descriptor>mvn:org.apache.karaf.features/standard/${org.apache.karaf.version}/xml/features</descriptor>
+-                                <descriptor>mvn:com.codenvy.platform-api-client-java/assemblies-karaf-uberjar/${com.codenvy.client.version}/xml/features</descriptor>
++                                <descriptor>mvn:com.codenvy.platform-api-client-java/assemblies-karaf-uberjar/${project.version}/xml/features</descriptor>
+                                 <descriptor>mvn:com.codenvy.cli/cli-feature/${project.version}/xml/features</descriptor>
+                             </descriptors>
+                             <features>
 diff --git a/cli/pom.xml b/cli/pom.xml
 index 70d5719..19ecc33 100644
 --- a/cli/pom.xml
@@ -311,6 +346,33 @@ index 065f414..d00b24d 100644
 -        </pluginRepository>
 -    </pluginRepositories>
  </project>
+diff --git a/dashboard/.gitignore b/dashboard/.gitignore
+new file mode 100644
+index 0000000..47c8438
+--- /dev/null
++++ b/dashboard/.gitignore
+@@ -0,0 +1,21 @@
++src/app/colors/codenvy-color.constant.js
++src/app/colors/template/
++src/app/proxy/proxy-settings.constant.js
++src/app/proxy/template/
++node_modules/
++bower_components/
++.sass-cache/
++.tmp/
++tmp
++coverage
++dist/
++
++.idea/
++*.iml
++docs
++/.settings/
++/.project
++/.tern-project
++
++target/
++uE001-README.MD
 diff --git a/dashboard/pom.xml b/dashboard/pom.xml
 index 8d043aa..55c8204 100644
 --- a/dashboard/pom.xml
